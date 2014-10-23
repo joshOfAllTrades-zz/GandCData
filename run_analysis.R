@@ -29,6 +29,9 @@ testSbjFile <- paste(testDir, "subject_test.txt", sep = "/")
 testXFile   <- paste(testDir, "X_test.txt", sep = "/")
 testYFile   <- paste(testDir, "Y_test.txt", sep = "/")
 
+# The output file for my resulting tidy data
+tidyFile    <- paste(dataDir, "tidy.txt", sep = "/")
+
 ####
 # Get the raw data
 
@@ -116,4 +119,4 @@ dataMelt <- melt(data, id = c("Subject", "Activity"))
 avgs <- ddply(dataMelt, c("Subject", "Activity"), summarize, mean = mean(value))
 
 # Save the resulting data for submission
-write.table(avgs, file = "tidy.txt", row.name = FALSE)
+write.table(avgs, file = tidyFile, row.name = FALSE)
