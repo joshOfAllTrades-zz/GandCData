@@ -104,6 +104,16 @@ names(data) <- union(c("Subject", "Activity"), fieldNames)
 
 ####
 # Create my new tidy data set
+library(reshape2)
+library(plyr)
 
+# Melt the data frame so I can calculate the averages
+dataMelt <- melt(data, id = c("Subject", "Activity"))
+
+# ******** Satisfies Step 5 with a tall, skinny data set ********
 # 5 From the data set in step 4, create a second, independent tidy data set
 #   with the average of each variable for each activity and each subject
+avgs <- ddply(dataMelt, c("Subject", "Activity"), summarize, mean = mean(value))
+
+# Save the resulting data for submission
+write.table(avgs, file = "tidy.txt", row.name = FALSE)
