@@ -45,17 +45,17 @@ if (!file.exists(dataDir)) {
 
 # Check to see if the zip file exists where we expect it. If not then look for
 # a copy of the file "next to" the script. If not there, then download it.
-# Finally, unzip the file for further processing.
 if (!file.exists(destFile)) {
     if (file.exists(manualFile)) {
         file.copy(manualFile, destFile)
     } else {
         download.file(srcUrl, destfile = destFile)
     }
+}
 
-    if (!file.exists(rawDataDir)) {
-        unzip(destFile, exdir = dataDir)
-    }
+# Finally, unzip the file for further processing.
+if (!file.exists(rawDataDir)) {
+  unzip(destFile, exdir = dataDir)
 }
 
 ####
@@ -136,3 +136,4 @@ avgs <- ddply(dataMelt,
 
 # Save the resulting data for submission
 write.table(avgs, file = tidyFile, row.name = FALSE)
+
