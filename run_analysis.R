@@ -116,7 +116,9 @@ dataMelt <- melt(data, id = c("Subject", "Activity"))
 # ******** Satisfies Step 5 with a tall, skinny data set ********
 # 5 From the data set in step 4, create a second, independent tidy data set
 #   with the average of each variable for each activity and each subject
-avgs <- ddply(dataMelt, c("Subject", "Activity"), summarize, mean = mean(value))
+avgs <- ddply(dataMelt,
+              c("Subject", "Activity", "variable"),
+              summarize, mean = mean(value))
 
 # Save the resulting data for submission
 write.table(avgs, file = tidyFile, row.name = FALSE)
