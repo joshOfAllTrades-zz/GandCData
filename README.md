@@ -1,13 +1,19 @@
 Getting and Cleaning Data Course Project
 =========
 
-## get_data.R
+## run_analysis.R
 
-get_data.R provides the logic for downloading the raw data from the Internet.
-
-It performs this function in several steps:
-
-1. It checks for the existance of a data subdirectory. It does not change directories as part of execution so this data directory will appear wherever the current directory is.
-1. It downloads the data as a zip file.
-1. It expands the zip file (also in the data directory). The structure of the zip file causes the data to appear in several sub-directories.
+This script performs all of the steps necessary to satisfy the requirements of the project. No arguments are required. Running the script performs a number of steps more thoroughly described in the [Code Book](CodeBook.md), but at a high level it...
+1. Download the raw data from the Internet (if it has not already done so)
+1. Read in the relevant data files
+  * features.txt
+  * activity_labels.txt
+  * subject_train.txt
+  * X_train.txt
+  * Y_train.txt
+  * subject_test.txt
+  * X_test.txt
+  * Y_test.txt
+1. Performs some correlation steps to merge the data into a single data frame.
+1. Generates a second data frame which holds the means of the variable's value grouped by both the subject and activity.
 
