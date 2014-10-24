@@ -5,30 +5,34 @@ Getting and Cleaning Data Course Project
 
 ### Source Data
 
-The source data is from Spanish researchers attempting to identify volunteer's activities based on the sensor readings from a Samsung Galaxy S II smartphone on their waist. The researchers observed the volunteers while they performing six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, and LAYING). The researchers then processed the sensor data through various methods as described in the README.txt included within the source ZIP file. The researchers then partitioned the data into two sets: one with 70% of the volunteers, the other with the remaining 30%.
+The source data is from Spanish researchers attempting to identify volunteer's activities based on the sensor readings from a Samsung Galaxy S II smartphone on the volunteers' waists. The researchers observed the volunteers while the volunteers performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, and LAYING). The researchers then processed the sensor data through various methods as described in the README.txt included within the source ZIP file. The researchers partitioned the data into two sets: a training set with 70% of the volunteers and testing set with the remaining 30%.
 
 The ZIP file containing the source data was acquired from [Coursera](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip).
 
 ### Processing
 
-The [Read Me](README.md) gives a high-level overview of the run_analysis.R script. The run_analysis.R script is the main and only script required to process the source data into the required tidy data set. The script performs the following steps to produce the tidy data set:
+The [Read Me](README.md) gives a high-level overview of the `run_analysis.R` script. A more thorough explination follows. The `run_analysis.R` script is the main and only script required to process the source data into the required tidy data set. The script performs the following steps to produce the tidy data set:
 
 1. Defines a number of "constants" for use in later steps.
 1. Downloads the source ZIP file if it has not previously been downloaded.
 1. Unzips the contents of the ZIP file.
 1. Reads in the subject files.
-  * subject_train.txt
-  * subject_test.txt
-1. Reads in the feature labels (features.txt).
+  * `subject_train.txt`
+  * `subject_test.txt`
+1. Reads in the feature labels (`features.txt`).
 1. Determines which features represent calculations of mean and standard deviation values by looking for feature names with the strings "mean()" and "std()".
-1. Reads in the testing and training "X" data utilizing the previously determined interesting features to read a subset of the features and reduce the amount of data loaded from disk (thus satisfying assignment **requirement #2**).
+1. Reads in the testing and training "X" data utilizing the previously determined interesting features to read a subset of the features and reduce the amount of data loaded from disk (**thus satisfying assignment requirement #2**).
+  * `X_train.txt`
+  * `X_test.txt`
 1. Reads in the testing and training "Y" data (observed activies).
-1. Reads in the activity mapping (1 = walking, 2 = walking upstairs, etc).
-1. Combines the subjects, observed activities, and selected feature data into a single data frame (thus satisfying assignment **requirment #1**).
-1. Utilizing the activity mapping, gives the observed activities meaningful labels (thus satisfying assignment **requirement #3**).
-1. Utilizing the feature labels, names the retained variables in the data set (thus satisfying assignment **requirement #4**).
+  * `Y_train.txt`
+  * `Y_test.txt`
+1. Reads in the activity mapping (1 = walking, 2 = walking upstairs, etc) (`activity_labels.txt`).
+1. Combines the subjects, observed activities, and selected feature data into a single data frame (**thus satisfying assignment requirment #1**).
+1. Utilizing the activity mapping, gives the observed activities meaningful labels (**thus satisfying assignment requirement #3**).
+1. Utilizing the feature labels, names the retained variables in the data set (**thus satisfying assignment requirement #4**).
 1. Using the reshape2 library, melts the wide data to a tall data set.
-1. Using the plyr library, calculates the mean for each variable for each subject and activity (thus satisfying assignment **requirement #5**). 
+1. Using the plyr library, calculates the mean for each variable for each subject and activity (**thus satisfying assignment requirement #5**). 
 1. Writes the resulting tidy data set to the data directory as the file `tidy.txt`.
 
 ### Data Dictionary
