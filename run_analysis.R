@@ -7,24 +7,26 @@ srcUrl <- paste(srcHost, srcPath, srcFile, sep = "")
 
 dataDir <- "data"
 file <- "uciDataset.zip"
+manualFile <- "UCI HAR Dataset.zip"
 destFile <- paste(dataDir, file, sep = "/")
 
 unzipDir <- "UCI HAR Dataset"
+rawDataDir <- paste(dataDir, unzipDir, sep = "/")
 
 # Features
-featuresFile <- paste(dataDir, unzipDir, "features.txt", sep = "/")
+featuresFile <- paste(rawDataDir, "features.txt", sep = "/")
 
 # Activity Catalog
-activitiesFile <- paste(dataDir, unzipDir, "activity_labels.txt", sep = "/")
+activitiesFile <- paste(rawDataDir, "activity_labels.txt", sep = "/")
 
 # Training files
-trainDir     <- paste(dataDir, unzipDir, "train", sep = "/")
+trainDir     <- paste(rawDataDir, "train", sep = "/")
 trainSbjFile <- paste(trainDir, "subject_train.txt", sep = "/")
 trainXFile   <- paste(trainDir, "X_train.txt", sep = "/")
 trainYFile   <- paste(trainDir, "Y_train.txt", sep = "/")
 
 # Testing files
-testDir     <- paste(dataDir, unzipDir, "test", sep = "/")
+testDir     <- paste(rawDataDir, "test", sep = "/")
 testSbjFile <- paste(testDir, "subject_test.txt", sep = "/")
 testXFile   <- paste(testDir, "X_test.txt", sep = "/")
 testYFile   <- paste(testDir, "Y_test.txt", sep = "/")
@@ -36,12 +38,24 @@ tidyFile    <- paste(dataDir, "tidy.txt", sep = "/")
 # Get the raw data
 
 # Make sure the data directory exists; create it if it doesn't. Further, assume
-# that we need to download and unpack the data. Conversely, if the directory
-# exists, assume that we already have gotten the data.
+# that we need to download and unpack the data.
 if (!file.exists(dataDir)) {
-  dir.create(dataDir)
-  download.file(srcUrl, destfile = destFile)
-  unzip(destFile, exdir = dataDir)
+    dir.create(dataDir)
+}
+
+# Check to see if the zip file exists where we expect it. If not then look for
+# a copy of the file "next to" the script. If not there, then download it.
+# Finally, unzip the file for further processing.
+if (!file.exists(destFile)) {
+    if (file.exists(manualFile)) {
+        file.copy(manualFile, destFile)
+    } else {
+        download.file(srcUrl, destfile = destFile)
+    }
+
+    if (!file.exists(rawDataDir)) {
+        unzip(destFile, exdir = dataDir)
+    }
 }
 
 ####
