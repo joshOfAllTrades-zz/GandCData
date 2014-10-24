@@ -4,8 +4,9 @@ Getting and Cleaning Data Course Project
 ## run_analysis.R
 
 This script performs all of the steps necessary to satisfy the requirements of the project. No arguments are required. Running the script performs a number of steps more thoroughly described in the [Code Book](CodeBook.md), but at a high level it...
-1. Download the raw data from the Internet (if it has not already done so)
-1. Read in the relevant data files
+
+1. Downloads the raw data from the Internet (if it has not already done so)
+1. Reads in the relevant data files
   * features.txt
   * activity_labels.txt
   * subject_train.txt
